@@ -1,0 +1,8 @@
+{
+    "/jquery/jquery.min.js": "/jquery/jquery.min.js",
+    "/js/dataTables.dataTables.min.js": "/js/dataTables.dataTables.min.js",
+    "/css/dataTables.dataTables.min.css": "/css/dataTables.dataTables.min.css",
+    "/js/parsley.min.js": "/js/parsley.min.js",
+    "/js/sweetalert2.min.js": "/js/sweetalert2.min.js",
+    "/js/sweetalert2.all.js": "/js/sweetalert2.all.js"
+}
