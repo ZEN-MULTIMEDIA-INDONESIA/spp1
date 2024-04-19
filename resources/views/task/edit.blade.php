@@ -14,35 +14,6 @@
             <div class="flex flex-wrap bg-white p-10 max-w-3xl">
                 <div class="w-full my-6 pr-0 lg:pr-2">
                     <div class="leading-loose">
-                        {{-- <div class="mb-3">
-                            <label
-                                for="task"
-                                class="block text-sm text-gray-600"
-                            >Rating</label>
-                            <div class="relative mb-6">
-                                <label
-                                    for="labels-range-input"
-                                    class="sr-only"
-                                >Labels range</label>
-                                <input
-                                    id="labels-range-input"
-                                    type="range"
-                                    value="1"
-                                    min="0"
-                                    max="5"
-                                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                                >
-                                <div class="w-full flex justify-between text-sm text-gray-600 absolute -bottom-6">
-                                    <span class="">Min
-                                        (0)</span>
-                                    <span class="">1</span>
-                                    <span class="">2</span>
-                                    <span class="">3</span>
-                                    <span class="">4</span>
-                                    <span class="">Max(5)</span>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="">
                             <label
                                 for="task"
@@ -54,6 +25,7 @@
                                 name="task"
                                 type="text"
                                 placeholder="Inputkan task"
+                                value="{{ $task->task }}"
                                 data-parsley-required
                             >
                         </div>
@@ -68,12 +40,12 @@
                                 class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
                                 data-parsley-required
                             >
-                                <option
-                                    selected
-                                    value=''
-                                >Pilih Proyek</option>
+                                <option value=''>Pilih Proyek</option>
                                 @foreach ($proyeks as $key => $proyek)
-                                <option value="{{ $proyek->id }}">{{ $proyek->nama }}</option>
+                                <option
+                                    value="{{ $proyek->id }}"
+                                    {{ $task->proyek_id == $proyek->id ? 'selected' : '' }}
+                                >{{ $proyek->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -87,6 +59,7 @@
                                 id="tanggal_tenggat"
                                 name="tanggal_tenggat"
                                 type="date"
+                                value="{{ $task->tanggal_tenggat }}"
                                 data-parsley-required
                             >
                         </div>

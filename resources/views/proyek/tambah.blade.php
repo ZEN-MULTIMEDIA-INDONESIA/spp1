@@ -172,7 +172,6 @@
                                 id="file_pendukung"
                                 type="file"
                                 name="file_pendukung"
-                                data-parsley-required
                             >
                             <p
                                 class="mt-1 text-sm text-gray-600"

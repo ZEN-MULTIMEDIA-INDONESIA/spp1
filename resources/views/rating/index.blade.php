@@ -5,50 +5,41 @@
 <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
     <main class="w-full flex-grow p-6">
         <h1 class="text-3xl text-black pb-6">Tabel Data Task</h1>
-        @if (auth()?->user()->peran === '0')
-        <div class="flex flex-wrap">
-            <a
-                href="{{ route('task.tambah') }}"
-                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-                <i class="fa-solid fa-plus mr-3"></i>
-                Tambah Data
-            </a>
-            <a
-                href="{{ route('task.restorasi') }}"
-                class="focus:outline-none text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700"
-            >
-                <i class="fa-solid fa-trash-can mr-3"></i>
-                Restorasi Data
-            </a>
-        </div>
-        @endif
-
-        <div class="w-full mt-6">
-            <div class="bg-white overflow-auto p-[2rem]">
+        <div class="w-full flex justify-center mt-6">
+            <div class="w-full lg:w-1/2 bg-white overflow-auto p-[2rem]">
                 <table
                     class="min-w-full bg-white"
                     id="tabel_task"
                 >
                     <thead class="bg-slate-400">
                         <tr>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm">Klien</th>
                             <th class="py-3 px-4 uppercase font-semibold text-sm">Proyek</th>
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">Total Task</th>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm">Rate</th>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm">Publish</th>
                             <th class="py-3 px-4 uppercase font-semibold text-sm">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        @foreach ($proyeks as $key => $proyek)
+                        @foreach ($ratings as $key => $rating)
                         <tr>
-                            <td class="py-3 px-4">{{ $proyek->nama }}</td>
-                            <td class="py-3 px-4">{{ count($proyek->task) }}</td>
+                            <td class="py-3 px-4">{{ $rating->user->nama }}</td>
+                            <td class="py-3 px-4">{{ $rating->proyek->nama }}</td>
+                            <td class="py-3 px-4">{{ $rating->rate }}</td>
+                            <td class="py-3 px-4">{{ $rating->publish === '1' ? 'Ya' : 'Tidak' }}</td>
                             <td class="py-3 px-4">
                                 <a
-                                    href="{{ route('task.detail', ['uuid' => $proyek->uuid]) }}"
+                                    href="{{ route('review-rating.detail', ['uuid' => $rating->uuid]) }}"
                                     class="text-white bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
                                 >
-                                    Detail Task
+                                    Detail
                                 </a>
+                                @if (auth()->user()->peran === '0')
+                                <a
+                                    class="text-white bg-green-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                                    Publish
+                                </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -28,5 +28,13 @@
             {{ $menu['name'] }}
         </a>
         @endforeach
+        <a
+            onclick="handleLogout()"
+            class="flex items-center text-white py-4 pl-6 nav-item
+            "
+        >
+            <i class="fa-solid fa-right-from-bracket mr-3"></i>
+            Logout
+        </a>
     </nav>
 </aside>

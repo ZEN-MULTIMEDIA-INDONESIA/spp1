@@ -96,6 +96,7 @@
                                                 class="block px-4 py-2 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white"
                                             >Detail</a>
                                         </li>
+                                        @if (auth()->user()?->peran === '0')
                                         <li>
                                             <a
                                                 href="{{ route('proyek.edit', ['uuid' => $proyek->uuid]) }}"
@@ -108,6 +109,7 @@
                                                 class="block px-4 py-2 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white"
                                             >Hapus</a>
                                         </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </td>

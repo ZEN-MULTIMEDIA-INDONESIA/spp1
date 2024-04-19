@@ -6,17 +6,27 @@ use App\Models\Proyek;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
-use function PHPSTORM_META\map;
-
 class TaskController extends Controller
 {
     public function index()
     {
         $data = [
             'title' => 'ZEN MULTIMEDIA INDONESIA',
+            'proyeks' => Proyek::where('deleted_at', null)->get()->all(),
             'tasks' => Task::where('deleted_at', null)->get()->all()
         ];
         return view('task.index', $data);
+    }
+
+    public function proyek_task($uuid)
+    {
+        $proyek = Proyek::where('uuid', $uuid)->first();
+        $data = [
+            'title' => 'Task',
+            'tasks' => Task::where('proyek_id', $proyek->id)->get()->all(),
+            'proyek' => $proyek
+        ];
+        return view('task.proyek-task', $data);
     }
 
     public function tambah()
@@ -41,20 +51,24 @@ class TaskController extends Controller
     {
         $data = [
             'title' => 'Edit Data',
-            'task' => Task::where('uuid', $uuid)->first()
+            'task' => Task::where('uuid', $uuid)->first(),
+            'proyeks' => Proyek::where('deleted_at', null)->get()->all()
         ];
         return view('task.edit', $data);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $uuid)
     {
+        $proyek = Proyek::where('uuid', $uuid)->first();
+
         Task::insert([
             'uuid' => uuid_create(),
             'task' => $request->task,
-            'proyek_id' => $request->proyek_id,
+            'tanggal_tenggat' => $request->tanggal_tenggat,
+            'proyek_id' => $proyek->id,
             'created_at' => now()
         ]);
-        return redirect()->route('task')->with([
+        return redirect()->route('task.detail', ['uuid' => $proyek->uuid])->with([
             'title' => 'Menambahkan data',
             'icon' => 'success',
             'text' => 'Berhasil menambahkan data task'
@@ -63,9 +77,8 @@ class TaskController extends Controller
 
     public function hapus($uuid)
     {
-        Task::where('uuid', $uuid)->update([
-            'deleted_at' => now()
-        ]);
+
+        Task::where('uuid', $uuid)->delete();
         return response()->json([
             'title' => 'Menghapus data',
             'icon' => 'success',
@@ -129,6 +142,28 @@ class TaskController extends Controller
             'title' => 'Penyelesaian Task',
             'icon' => 'success',
             'text' => 'Berhasil mengupdate data task, terimakasih pengerjaan anda akan segera direview!'
+        ]);
+    }
+
+    public function finishing($uuid)
+    {
+        $task = Task::where('uuid', $uuid)->first();
+
+
+        Task::where('uuid', $uuid)->update([
+            'status' => '2',
+            'updated_at' => now()
+        ]);
+
+        Proyek::where('id', $task->proyek_id)->update([
+            'status' => '3',
+            'updated_at' => now()
+        ]);
+
+        return response()->json([
+            'title' => 'Finishing Task',
+            'icon' => 'success',
+            'text' => 'Task telah direview dan telah dikonfirmasi telah selesai!'
         ]);
     }
 }

@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KlienController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PemantauanProyekController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProyekController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,17 +59,25 @@ Route::controller(TaskController::class)->group(function () {
     Route::get('/task/tambah', 'tambah')->name('task.tambah');
     Route::get('/task/restorasi', 'restorasi')->name('task.restorasi');
     Route::get('/task/edit/{uuid}', 'edit')->name('task.edit');
-    Route::get('/task/detail/{uuid}', 'detail')->name('task.detail');
+    Route::get('/task/detail/{uuid}', 'proyek_task')->name('task.detail');
 
     Route::put('/task/update/{uuid}', 'update')->name('task.update');
     Route::put('/task/restore/{uuid}', 'restore')->name('task.restore');
     Route::put('/task/update/terima-task/{uuid}', 'terima_task')->name('task.terima-task');
     Route::put('/task/update/penyelesaian-task/{uuid}', 'penyelesaian_task')->name('task.penyelesaian-task');
+    Route::put('/task/update/finishing/{uuid}', 'finishing')->name('task.finishing');
 
     Route::delete('/task/hapus/{uuid}', 'hapus')->name('task.hapus');
-    Route::delete('/task/hapus-permanen/{uuid}', 'hapus_permanen')->name('task.hapus_permanen');
 
-    Route::post('/task/store', 'store')->name('task.store');
+    Route::post('/task/store/{uuid}', 'store')->name('task.store');
+});
+
+Route::controller(CatatanController::class)->group(function () {
+    Route::get('/task/detail/catatan/{uuid}', 'index')->name('catatan.task');
+
+    Route::delete('/task/detail/catatan/hapus/{uuid}', 'hapus')->name('catatan.task.hapus');
+
+    Route::post('/task/detail/catatan/{id}/store', 'store')->name('catata.task.store');
 });
 
 Route::controller(KlienController::class)->group(function () {
@@ -102,8 +112,21 @@ Route::controller(PenggunaController::class)->group(function () {
 
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/profile/ubah-password', 'ubah_password')->name('profile.ubah-password');
+
+    Route::post('/profile/ubah-password/store', 'ubah_password_store')->name('profile.ubah-password.store');
+    Route::post('/profile/ubah-profile/store', 'ubah_profile');
 });
 
 Route::controller(PemantauanProyekController::class)->group(function () {
     Route::get('/pemantauan-proyek', 'index')->name('pemantauan-proyek');
+    Route::get('/pemantauan-proyek/rating/{uuid}', 'rating')->name('pemantauan-proyek.rating');
+
+    Route::post('/pemantauan-proyek/rating/{uuid}/store', 'submit_rating')->name('pemantauan-proyek.rating.store');
+});
+
+Route::controller(RatingController::class)->group(function () {
+    Route::get('/review-rating', 'index')->name('review-rating');
+    Route::get('/review-rating/detail/{uuid}', 'detail')->name('review-rating.detail');
 });

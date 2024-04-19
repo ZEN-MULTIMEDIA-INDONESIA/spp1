@@ -20,42 +20,56 @@ class Sidebar extends Component
                 'icon' => '<i class="fas fa-tachometer-alt mr-3"></i>',
                 'slugName' => 'dashboard',
                 'url' => 'dashboard',
-                'access' => ['pm', 'klien']
+                'access' => ['0', '4']
             ],
             [
                 'name' => 'Klien',
                 'icon' => '<i class="fas fa-users mr-3"></i>',
                 'slugName' => 'klien',
                 'url' => 'klien',
-                'access' => ['pm', 'klien']
+                'access' => ['0', '4']
             ],
             [
                 'name' => 'Pengguna',
                 'icon' => '<i class="fas fa-users mr-3"></i>',
                 'slugName' => 'pengguna',
                 'url' => 'pengguna',
-                'access' => ['pm']
+                'access' => ['0']
             ],
             [
                 'name' => 'Proyek',
                 'icon' => '<i class="fa-solid fa-file-lines mr-3"></i>',
                 'slugName' => 'proyek',
                 'url' => 'proyek',
-                'access' => ['pm', 'klien']
+                'access' => ['0', '4']
             ],
             [
                 'name' => 'Task',
                 'icon' => '<i class="fa-solid fa-list-check mr-3"></i>',
                 'slugName' => 'task',
                 'url' => 'task',
-                'access' => ['pm']
+                'access' => ['0']
+            ],
+            [
+                'name' => 'Review Rating',
+                'icon' => '<i class="fa-solid fa-star mr-3"></i>',
+                'slugName' => 'review-rating',
+                'url' => 'review-rating',
+                'access' => ['0', '1', '2', '3']
             ],
             [
                 'name' => 'Pemantauan Proyek',
                 'icon' => '<i class="fa-solid fa-magnifying-glass mr-3"></i>',
                 'slugName' => 'pemantauan-proyek',
                 'url' => 'pemantauan-proyek',
-                'access' => ['pm', 'klien']
+                'access' => ['0', '4']
+            ],
+            [
+                'name' => 'Profile',
+                'icon' => '<i class="fa-solid fa-user mr-3"></i>',
+                'slugName' => 'profile',
+                'url' => 'profile',
+                'access' => ['0', '1', '2', '3', '4']
             ],
         ];
     }

@@ -47,9 +47,9 @@
         </li>
         <li>
             <a
-                href="#"
+                href="{{ route('profile') }}"
                 class="block px-4 py-2 hover:bg-gray-100 "
-            >Kelola Akun</a>
+            >Profile</a>
         </li>
     </ul>
     <div class="py-2">

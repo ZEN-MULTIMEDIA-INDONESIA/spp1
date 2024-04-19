@@ -11,7 +11,7 @@
                         <div class="flex flex-col items-center p-10">
                             <img
                                 class="w-24 h-24 mb-3 rounded-full shadow-lg border"
-                                src="{{ auth()?->user()?->foto ? asset('storage/' . auth()?->user()?->foto) : asset('icon/default.jpg') }}"
+                                src="{{ $proyek->user->foto ? asset('storage/' . $proyek->user->foto) : asset('icon/default.jpg') }}"
                                 alt="Profile Image"
                             />
                             <h5 class="mb-1 text-xl font-medium text-black">{{ $proyek->user->nama }}

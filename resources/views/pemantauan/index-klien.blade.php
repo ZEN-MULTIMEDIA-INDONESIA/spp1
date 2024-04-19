@@ -40,11 +40,11 @@
                             @endif
                             @endforeach
                             <div class="flex mt-4 md:mt-6">
-                                @if ($proyek->rating)
+                                @if ($proyek->status === '3')
                                 <a
                                     href="{{ route('pemantauan-proyek.rating', ['uuid' => $proyek->uuid]) }}"
                                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-400"
-                                >Lihat Rating</a>
+                                >Rating</a>
                                 @endif
                             </div>
                         </div>
